@@ -1,0 +1,68 @@
+/* ONLY STYLES SHOULD BE ADDED - GNERAL OVERRIDES GO IN DEFAULT */
+
+#svsn-customized {
+    background-color: #222;
+    color: #f1f1f1;
+}
+#svsn-customized ul,
+#svsn-customized li,
+#svsn-customized ol,
+#svsn-customized dl,
+#svsn-customized th,
+#svsn-customized td,
+#svsn-customized p,
+#svsn-customized pre,
+#svsn-customized blockquote{
+    color: #e4e4e4;
+}
+#svsn-customized a {
+    color: orange;
+}
+#svsn-customized h1 {
+    color: #999;
+}
+#svsn-customized h2 {
+    color: #71b6bc;
+}
+#svsn-customized h3 {
+    color: #7c6693;
+}
+#svsn-customized hr {
+    border: none;
+    border-top: 1px solid #444;
+}
+#svsn-customized li {
+    line-height: 1.8em;
+}
+#svsn-customized ol > li > ol > li,
+#svsn-customized ul > li > ul > li {
+    font-size: 90%;
+}
+
+#svsn-customized blockquote,
+#svsn-customized table {
+    border-color: #555;
+}
+
+#svsn-customized i,
+#svsn-customized em {
+    color: #e2d69c;
+}
+
+#svsn-customized table {
+    background-color: #333;
+    margin: 1.5em 0;
+}
+#svsn-customized .table>tbody>tr>td,
+#svsn-customized .table>tbody>tr>th,
+#svsn-customized .table>tfoot>tr>td,
+#svsn-customized .table>tfoot>tr>th,
+#svsn-customized .table>thead>tr>td,
+#svsn-customized .table>thead>tr>th {
+    border-color: #555;
+}
+
+
+#svsn-customized pre {
+    background-color: #444;
+}

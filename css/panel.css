@@ -1,0 +1,52 @@
+/* Hidden, shadow dom styles that do not interact with the page. */
+
+.svsn-active-btn {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.svsn-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#svsn-container {
+    font-size: 80%;
+}
+#edit-mode-indicator,
+#svsn-toolbar {
+    z-index: 99999;
+}
+#svsn-toolbar {
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    position: absolute;
+}
+#svsn-toolbar .panel-heading:hover {
+    cursor: move;
+}
+#edit-mode-indicator {
+    display: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    pointer-events: none;
+    font-size: 12px;
+    color: black;
+    border: 10px solid rgba(255, 171, 0, 0.6);
+    text-shadow: 0 1px 1px white;
+    line-height: 23px;
+}
+#edit-mode-indicator strong {
+  background-color: rgba(255, 171, 0, 0.6);
+  padding: 4px 10px;
+  border-radius: 0 0 10px 10px;
+}
+#edit-mode-indicator.svsn-editing {
+    display: block;
+}
+#node-info {
+    right: 0;
+    left: auto;
+    background-color: white;
+    color: black;
+}

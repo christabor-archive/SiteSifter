@@ -1,0 +1,60 @@
+.edit-toggle-btns {
+    font-size: 8px;
+    padding: 1px 2px;
+    margin: 3px 6px;
+}
+.edit-toggle-btns a {
+    color: white;
+}
+.thumb,
+.thumbinner {
+    display: inline-block;
+    margin: 4px 14px 14px 0;
+}
+#toctitle hr {
+    display: none;
+}
+.toctoggle {
+    color: #666;
+    opacity: 0.7;
+}
+#p-search {
+    display: inline-block;
+    padding: 8px 13px;
+    font-size: 10px;
+    opacity: 0.6;
+    margin: 0 0 10px 10px;
+}
+.hatnote.well {
+    text-align: center;
+    font-size: 11px;
+    opacity: 0.8;
+    font-style: italic;
+    padding: 3px 6px;
+}
+#p-search form, #p-search h3 {display: inline-block;font-size: 12px;}
+.inline-pad {margin: 4px 10px;}
+.thumbcaption {
+    font-family: 'Source Sans Pro';
+    font-size: 10px;
+}
+.references li {
+    padding: 9px 0;
+    font-size: 85%;
+}
+.ambox {
+    font-size: 12px;
+    opacity: 0.5;
+}
+.ambox:hover {
+    opacity: 1;
+}
+#toc {
+    font-size: 14px;
+}
+.NavContent {
+    margin: 0;
+    padding: 0;
+}
+#mw-hidden-catlinks,
+.mw-editsection-bracket {display:none;}

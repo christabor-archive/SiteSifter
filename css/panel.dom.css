@@ -1,0 +1,10 @@
+/* Styles that SHOULD override the existing page. */
+
+body.svsn-editing .editable-svsn:hover {
+    /*border: 1px solid rgba(255, 0, 0, 0.1);*/
+    background-color: rgba(255, 0, 0, 0.1);
+    cursor: pointer;
+}
+.svsn-marked {
+    opacity: 0.1;
+}
