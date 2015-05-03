@@ -1,40 +1,10 @@
-/*
-    Structure:
-    ==================================
-
-    All events go directly through an external content_script
-    (panel.js, clean.js, etc...), except persistence,
-    which relays messages to background, which handles models.
-
-    Popup/content_scripts are best thought of as views,
-    background as controllers, and models/localStorage as models.
-
-    e.g.
-
-    popup -> ui events -> content_scripts
-    popup -> save -> background -> save
-
-*/
-
 window.panel_open = false;
 
-function sendMsg(data) {
-    chrome.runtime.sendMessage(data, function(response) {
-      console.log(response.message);
-    });
-}
-
 function savePage() {
-    // TODO: must use form submission in this page instead.
-    var use_origin = confirm('Use entire domain (instead of just this page?)');
-    var data = {
-        is_active: true,
-        dom_data: $('body').html(),
-        theme: 'default',
-        url: use_origin ? window.location.origin :  window.location.href
-    };
-    console.log('save...');
-    sendMsg({command: 'save', savedata: data});
+    // // TODO: save parsed html if specified.
+    chrome.tabs.executeScript({
+        file: 'js/save.js'
+    });
 }
 
 function openPanel() {
@@ -43,7 +13,6 @@ function openPanel() {
     chrome.tabs.executeScript({
         file: 'js/panel.js'
     });
-
     window.panel_open = !window.panel_open;
     $(this).text((window.panel_open ? 'Close' : 'Open') + ' panel');
 }
@@ -63,14 +32,17 @@ function checkForMatch() {
     });
 }
 
+function cleanCurrentPage() {
+    chrome.tabs.executeScript({
+        file: 'js/clean.js'
+    });
+}
+
 function init() {
     // Below scopes = popup DOM, unless injected.
     $('#open-panel').on('click', openPanel);
-    $('#clean-page').on('click', function(){
-        console.log('cleaning page...');
-    });
+    $('#clean-page').on('click', cleanCurrentPage);
     $('#save-page').on('click', savePage);
-
     checkForMatch();
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log('onMessage listener for popup', arguments);

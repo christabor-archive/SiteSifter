@@ -209,6 +209,8 @@ function cleanWikipedia() {
 }
 
 function cleanPage() {
+    // Don't clean the extension page.
+    if($('#svsn-popup').length > 0) return;
     // Hide immediately
     $('body').hide().attr('id', 'svsn-customized');
     log('Cleaning page...' + window.location.href);

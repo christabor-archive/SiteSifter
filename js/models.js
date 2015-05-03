@@ -14,10 +14,10 @@ function CleanedSite(data) {
 
     this.serializeData = function() {
         var obj = {
-            'url': self.url,
-            'theme': self.theme,
-            'dom_data': self.dom_data,
-            'is_active': self.is_active
+            url: self.url,
+            theme: self.theme,
+            dom_data: self.dom_data,
+            is_active: self.is_active
         };
         return obj;
         // TODO: decide of JSON is necessary - chrome supports
@@ -29,14 +29,18 @@ function CleanedSite(data) {
         // Data is keyed by url, and stored as a json string.
         var data = self.serializeData();
         var obj = {};
+        var url = self.url;
         obj[self.url] = data;
         log('data to be saved:', obj);
         chrome.storage.sync.set(obj, callback || function(){
-            return viewSiteData(self.url);
+            chrome.storage.sync.get(url, function(data){
+                log('Retrieving saved site: ' + url + ' from cache.', data);
+            });
         });
     };
 }
 
 function Theme(styles) {
     var self = this;
+    // TODO
 }

@@ -92,9 +92,3 @@ function log() {
 function useTheme(theme) {
     addStyle('themes/theme.' + theme + '.css')
 }
-
-function viewSiteData(url) {
-    chrome.storage.sync.get(url, function(data){
-        log('Retrieving saved site: ' + url + ' from cache.', data);
-    });
-}
