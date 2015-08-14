@@ -27,11 +27,11 @@ function CleanedSite(data) {
         var obj = {};
         var url = self.url;
         obj[self.url] = data;
-        log('data to be saved:', obj);
+        console.log('data to be saved:', obj);
         chrome.storage.sync.set(obj, callback || function(){
             console.log('Saving site: ' + url);
             chrome.storage.sync.get(url, function(data){
-                log('Retrieving saved site: ' + url + ' from cache.', data);
+                console.log('Retrieving saved site: ' + url + ' from cache: ', data);
             });
         });
     };

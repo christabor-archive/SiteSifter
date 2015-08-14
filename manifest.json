@@ -1,5 +1,4 @@
 {
-  "default_locale": "en",
   "name": "SiteSifter",
   "version": "1.0",
   "manifest_version": 2,
@@ -25,9 +24,6 @@
   "chrome_url_overrides": {
     "newtab": "override.html"
   },
-  // "background": {
-  //   "scripts": ["js/background.js"]
-  // },
   "devtools_page": "devtools.html",
   "options_page": "options.html",
   "content_scripts": [{
@@ -38,7 +34,6 @@
       "js/helpers.cleaners.js",
       "js/models.js",
       "js/cleaners.js",
-      // "js/background.js",
       "js/popup.js"
     ],
     "css": [],

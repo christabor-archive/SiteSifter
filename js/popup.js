@@ -1,19 +1,20 @@
 window.panel_open = false;
 
 function savePage(e) {
+    e.preventDefault();
     var params = {
-        use_origin: $('[name="use-origin"]').is(':checked')
+        use_origin: $('[name="use-origin"]').is(':checked'),
+        theme: $('[name="themes"]').val()
     };
-    var code = 'var params = ' + JSON.stringify(params) + ';';
-    console.log(code);
     chrome.tabs.executeScript({
-        code: code
+        code: getParamString(params)
     }, function() {
         chrome.tabs.executeScript({file: 'js/save.js'});
     });
 }
 
 function deletePage(e) {
+    e.preventDefault();
     chrome.tabs.executeScript({file: 'js/delete.js'});
 }
 
@@ -34,7 +35,7 @@ function checkCache(url, fallback_url) {
             }
         } else {
             if(data[url].is_active) {
-                cleanPage();
+                cleanPage(data[url]);
             } else {
                 console.log('Found match, but it is inactive.');
             }
@@ -42,9 +43,19 @@ function checkCache(url, fallback_url) {
     });
 }
 
-function cleanCurrentPage() {
+function getParamString(params) {
+    return 'var params = ' + JSON.stringify(params) + ';'
+}
+
+function cleanCurrentPage(e) {
+    e.preventDefault();
+    var params = {
+        theme: $('[name="themes"]').val()
+    };
     chrome.tabs.executeScript({
-        file: 'js/clean.js'
+        code: getParamString(params)
+    }, function() {
+        chrome.tabs.executeScript({file: 'js/cleaners.js'});
     });
 }
 
@@ -54,16 +65,18 @@ function init() {
     $('#delete-page').on('click', deletePage);
     // http://stackoverflow.com
     // /questions/17567624/pass-parameter-using-executescript-chrome
-    $('#save-page').on('click', savePage);
-    checkCache(window.location.href, window.location.host);
+    $('#save-page').on('submit', savePage);
+    checkCache(window.location.href, window.location.origin);
 
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        chrome.notifications.create(null, {
-            title: 'SiteSifter',
-            type: 'basic',
-            message: 'Successfully removed url.'
-        });
-        alert('Successfully removed url');
+        // chrome.notifications.create(null, {
+        //     title: 'SiteSifter',
+        //     type: 'basic',
+        //     message: 'Successfully removed url.'
+        // });
+        // chrome.tabs.reload({
+        //     reloadProperties: false
+        // });
         // console.log(sender.tab ?
         // "from a content script:" + sender.tab.url :
         // "from the extension");

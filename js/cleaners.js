@@ -64,7 +64,8 @@ function cleanWikipedia() {
     useTheme('wikipedia');
 }
 
-function cleanPage(options) {
+function cleanPage(params) {
+    console.log('CleanPage params: ', params);
     // Don't clean the extension page.
     if($('#svsn-popup').length > 0) return;
     // Hide immediately
@@ -93,21 +94,23 @@ function cleanPage(options) {
         style_container: true,
         table_classes: 'table table-striped table-bordered table-hover',
     });
+
     fixWidthHeight();
     addStyle('themes/default.css');
     addStyle('themes/theme.basic.css');
 
-    var use_dark = false;
+    var themes = {
+        'light': 'themes/theme.light.css',
+        'dark': 'themes/theme.dark.css'
+    };
 
-    if(use_dark) {
-        addStyle('themes/theme.dark.css');
+    if(params.theme == 'dark') {
+        addStyle(themes.dark);
         $('.navbar-nav').addClass('navbar-inverse');
-    } else {
-        addStyle('themes/theme.light.css');
+    } else if(params.theme == 'light') {
+        addStyle(themes.light);
     }
-
     defaultFontStyles();
-    useTheme(options ? options.theme : 'default');
     $('body').show();
 }
 
