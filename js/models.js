@@ -11,13 +11,15 @@ function CleanedSite(data) {
     this.theme = data.theme || null;
     this.is_active = data.is_active || true;
     this.dom_data = data.dom_data || null;
+    this.stripped = data.stripped || false;
 
     this.serializeData = function() {
         var obj = {
             url: self.url,
             theme: self.theme,
             dom_data: self.dom_data,
-            is_active: self.is_active
+            is_active: self.is_active,
+            stripped: self.stripped
         };
         return obj;
     };

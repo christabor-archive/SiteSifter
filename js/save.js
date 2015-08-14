@@ -5,6 +5,7 @@ var site = new CleanedSite({
     url: params.use_origin ? window.location.origin : window.location.href,
     is_active: true,
     dom_data: null,
+    stripped: params.strip_all,
     theme: params.theme || 'default'
 });
 console.log('Saving!');

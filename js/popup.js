@@ -4,7 +4,8 @@ function savePage(e) {
     e.preventDefault();
     var params = {
         use_origin: $('[name="use-origin"]').is(':checked'),
-        theme: $('[name="themes"]').val()
+        theme: $('[name="themes"]').val(),
+        strip_all: $('[name="strip-all"]').is(':checked')
     };
     chrome.tabs.executeScript({
         code: getParamString(params)
