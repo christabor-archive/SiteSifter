@@ -51,7 +51,6 @@
 
 #svsn-customized table {
     background-color: #333;
-    margin: 1.5em 0;
 }
 #svsn-customized .table>tbody>tr>td,
 #svsn-customized .table>tbody>tr>th,
@@ -61,8 +60,9 @@
 #svsn-customized .table>thead>tr>th {
     border-color: #555;
 }
-
-
+#svsn-customized .table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #333;
+}
 #svsn-customized pre {
     background-color: #444;
 }

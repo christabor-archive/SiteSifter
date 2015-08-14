@@ -1,4 +1,29 @@
-table:hover {
+#svsn-customized table:hover {
   background-color: white;
   box-shadow: #ccc;
+}
+#svsn-customized table {
+    margin: 1.5em 0;
+}
+#svsn-customized h1 {
+    font-size: 2.2em;
+}
+#svsn-customized h2 {
+    font-size: 1.8em;
+}
+#svsn-customized h3 {
+    font-size: 1.5em;
+}
+#svsn-customized h4 {
+    font-size: 1.2em;
+}
+#svsn-customized p {
+    font-size: 1.1em;
+    line-height: 1.8em;
+}
+
+/* Bootstra overrides */
+
+#svsn-customized .img-thumbnail {
+    max-width: none;
 }
