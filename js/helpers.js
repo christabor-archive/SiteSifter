@@ -85,10 +85,14 @@ function setupShadowDOM(shadow_selector, template_selector) {
 
 function log() {
     // Debug func
-    console.log('-------------------------------');
-    $.map(arguments, function(k, v){console.log('[KEY] ' + k + ' [VAL] ' + v)});
+    // console.log('-------------------------------');
+    // $.map(arguments, function(k, v){console.log('[KEY] ' + k + ' [VAL] ' + v)});
 }
 
 function useTheme(theme) {
-    addStyle('themes/theme.' + theme + '.css')
+    addStyle('themes/' + theme + '.css')
+}
+
+function addGoogleFont(dom, params) {
+    return dom.append("<link href='" + window.location.protocol + "//fonts.googleapis.com/css?" + params + "' rel='stylesheet' type='text/css'>");
 }

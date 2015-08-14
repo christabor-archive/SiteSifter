@@ -1,33 +1,43 @@
 window.panel_open = false;
 
-function savePage() {
-    // // TODO: save parsed html if specified.
+function savePage(e) {
+    var params = {
+        use_origin: $('[name="use-origin"]').is(':checked')
+    };
+    var code = 'var params = ' + JSON.stringify(params) + ';';
+    console.log(code);
     chrome.tabs.executeScript({
-        file: 'js/save.js'
+        code: code
+    }, function() {
+        chrome.tabs.executeScript({file: 'js/save.js'});
     });
 }
 
+function deletePage(e) {
+    chrome.tabs.executeScript({file: 'js/delete.js'});
+}
+
 function openPanel() {
-    console.log('open panel...');
-    if(window.panel_open) return;
-    chrome.tabs.executeScript({
-        file: 'js/panel.js'
-    });
+    chrome.tabs.executeScript({file: 'js/panel.js'});
     window.panel_open = !window.panel_open;
     $(this).text((window.panel_open ? 'Close' : 'Open') + ' panel');
 }
 
-function checkForMatch() {
-    // See if the url has been saved before, and load if so.
-    var url = window.location.href;
+function checkCache(url, fallback_url) {
     chrome.storage.sync.get(url, function(data){
-        // SCOPE = users browser DOM
+        console.log('Check cache data: ', data);
         if($.isEmptyObject(data)) {
             console.log('No page found in existing storage.');
+            if(fallback_url) {
+                console.log('...Attempting fallback url.');
+                return checkCache(fallback_url, null);
+            }
         } else {
-            // TODO: load custom config per site,
-            // not just the generic function
-            cleanPage();
+            if(data[url].is_active) {
+                cleanPage();
+            } else {
+                console.log('Found match, but it is inactive.');
+            }
         }
     });
 }
@@ -39,13 +49,25 @@ function cleanCurrentPage() {
 }
 
 function init() {
-    // Below scopes = popup DOM, unless injected.
     $('#open-panel').on('click', openPanel);
     $('#clean-page').on('click', cleanCurrentPage);
+    $('#delete-page').on('click', deletePage);
+    // http://stackoverflow.com
+    // /questions/17567624/pass-parameter-using-executescript-chrome
     $('#save-page').on('click', savePage);
-    checkForMatch();
+    checkCache(window.location.href, window.location.host);
+
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        console.log('onMessage listener for popup', arguments);
+        chrome.notifications.create(null, {
+            title: 'SiteSifter',
+            type: 'basic',
+            message: 'Successfully removed url.'
+        });
+        alert('Successfully removed url');
+        // console.log(sender.tab ?
+        // "from a content script:" + sender.tab.url :
+        // "from the extension");
+        // sendResponse({farewell: "goodbye"});
     });
 }
 

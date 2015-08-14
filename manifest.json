@@ -1,6 +1,6 @@
 {
   "default_locale": "en",
-  "name": "Signal vs. Noise",
+  "name": "SiteSifter",
   "version": "1.0",
   "manifest_version": 2,
   "offline_enabled": true,
@@ -25,14 +25,20 @@
   "chrome_url_overrides": {
     "newtab": "override.html"
   },
+  // "background": {
+  //   "scripts": ["js/background.js"]
+  // },
+  "devtools_page": "devtools.html",
   "options_page": "options.html",
   "content_scripts": [{
     "js": [
       "js/vendor/jquery.min.js",
       "js/vendor/jquery-ui.min.js",
       "js/helpers.js",
+      "js/helpers.cleaners.js",
       "js/models.js",
       "js/cleaners.js",
+      // "js/background.js",
       "js/popup.js"
     ],
     "css": [],

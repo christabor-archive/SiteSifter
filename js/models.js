@@ -20,10 +20,6 @@ function CleanedSite(data) {
             is_active: self.is_active
         };
         return obj;
-        // TODO: decide of JSON is necessary - chrome supports
-        // objects directly, whereas localStorage does not.
-        // see https://developer.chrome.com/extensions/storage
-        // return JSON.stringify();
     };
     this.save = function(callback) {
         // Data is keyed by url, and stored as a json string.
@@ -33,6 +29,7 @@ function CleanedSite(data) {
         obj[self.url] = data;
         log('data to be saved:', obj);
         chrome.storage.sync.set(obj, callback || function(){
+            console.log('Saving site: ' + url);
             chrome.storage.sync.get(url, function(data){
                 log('Retrieving saved site: ' + url + ' from cache.', data);
             });
